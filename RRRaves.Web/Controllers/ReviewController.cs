@@ -42,7 +42,7 @@ namespace RRRaves.Web.Controllers
                     var rf = new ReviewFunctions();
                     rf.AddReview(WebDataConversion.WebReviewToData(WebRv));
                     var temp = WebRv.Restaurant;
-                    return RedirectToAction("Index", "Restaurant");
+                    return RedirectToAction("Index", "Restaurant", null);
                 } else
                 {
                     return View();
@@ -84,7 +84,7 @@ namespace RRRaves.Web.Controllers
                     ReviewFunctions rf = new ReviewFunctions();
                     rf.UpdateReview(webr.ReviewID, temp);
                     var temp2 = webr.Restaurant;
-                    return RedirectToAction("Index", "Restaurant");
+                    return RedirectToAction("Index", "Restaurant", null);
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace RRRaves.Web.Controllers
                     ReviewFunctions rf = new ReviewFunctions();
 
                     rf.RemoveReview(id);
-                    return RedirectToAction("Index", "Restaurant");
+                    return RedirectToAction("Index", "Restaurant", null);
             
             }
             catch

@@ -94,7 +94,7 @@ namespace RRRaves.Web.Controllers
                     var temp = WebDataConversion.WebRestaurantToData(webRestaurant);
                     var rf = new RestaurantFunctions();
                     rf.AddRestaurant(temp);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Restaurant", null);
                 }
                 else
                 {
@@ -139,7 +139,7 @@ namespace RRRaves.Web.Controllers
                 }
                 else
                 {
-                    return View("Edit");
+                    return View("Edit", new { @id = wr.RestaurantID });
                 }
             }
             catch
@@ -156,7 +156,7 @@ namespace RRRaves.Web.Controllers
                 SearchRestaurants sr = new SearchRestaurants();
                 var temp = sr.GetRestaurant(id.Value);
 
-                return View(WebDataConversion.RestaurantToWeb(temp));
+                return View("Delete", WebDataConversion.RestaurantToWeb(temp));
             }
             else
             {
@@ -174,7 +174,7 @@ namespace RRRaves.Web.Controllers
                     RestaurantFunctions rf = new RestaurantFunctions();
 
                     rf.RemoveRestaurant(id);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", null);
 
             }
             catch
