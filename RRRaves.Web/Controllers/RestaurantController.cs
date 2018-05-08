@@ -139,7 +139,7 @@ namespace RRRaves.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Edit", "Restaurant", new { id = wr.RestaurantID });
+                    return View("Edit");
                 }
             }
             catch

@@ -45,7 +45,7 @@ namespace RRRaves.Web.Controllers
                     return RedirectToAction("Index", "Restaurant");
                 } else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return View();
                 }
 
             }
@@ -88,7 +88,7 @@ namespace RRRaves.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Edit", "Review", new { id = webr.ReviewID });
+                    return View("Edit");
                 }
             }
             catch

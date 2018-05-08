@@ -49,7 +49,7 @@ namespace Project0.Tests
 
             Review reviewEx = new Review();
             reviewEx.ID_Review = 12;
-            reviewEx.Rating = 0;
+            reviewEx.Rating = 4;
             reviewEx.Restaurant = 1;
 
 
