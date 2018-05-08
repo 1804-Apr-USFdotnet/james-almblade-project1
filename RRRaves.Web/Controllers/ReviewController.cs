@@ -77,6 +77,7 @@ namespace RRRaves.Web.Controllers
         {
             try
             {
+  
                 if (ModelState.IsValid)
                 {
                     var temp = WebDataConversion.WebReviewToData(webr);
@@ -87,12 +88,13 @@ namespace RRRaves.Web.Controllers
                 }
                 else
                 {
-                    return View("Edit", webr.ReviewID);
+                    return RedirectToAction("Edit", "Review", new { id = webr.ReviewID });
                 }
             }
             catch
             {
-                return View("Edit", webr.ReviewID);
+
+                return new EmptyResult();
             }
         }
 
