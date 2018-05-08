@@ -21,6 +21,7 @@
         @using (Html.BeginForm("Delete"))
     {
         @Html.AntiForgeryToken()
+
         @Html.HiddenFor(model => model.Name)
         @Html.HiddenFor(model => model.Address)
         @Html.HiddenFor(model => model.City)
@@ -29,7 +30,6 @@
         @Html.HiddenFor(model => model.Website)
         @Html.HiddenFor(model => model.RestaurantID)
         @Html.HiddenFor(model => model.AveRating)
-
         <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
 }
     </div>

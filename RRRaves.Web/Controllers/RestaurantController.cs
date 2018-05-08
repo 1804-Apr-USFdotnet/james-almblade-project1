@@ -156,7 +156,7 @@ namespace RRRaves.Web.Controllers
                 SearchRestaurants sr = new SearchRestaurants();
                 var temp = sr.GetRestaurant(id.Value);
 
-                return View("Delete", WebDataConversion.RestaurantToWeb(temp));
+                return View(WebDataConversion.RestaurantToWeb(temp));
             }
             else
             {
@@ -164,7 +164,7 @@ namespace RRRaves.Web.Controllers
             }
         }
 
-        // POST: Restaurant/Delete/5
+        // Does not delete unless all reviews are gone.
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -174,7 +174,7 @@ namespace RRRaves.Web.Controllers
                     RestaurantFunctions rf = new RestaurantFunctions();
 
                     rf.RemoveRestaurant(id);
-                    return RedirectToAction("Index", "Home", null);
+                    return RedirectToAction("Index", "Restaurant", null);
 
             }
             catch
