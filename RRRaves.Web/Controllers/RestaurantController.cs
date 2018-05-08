@@ -103,7 +103,7 @@ namespace RRRaves.Web.Controllers
             }
             catch
             {
-                return View();
+                return new EmptyResult();
             }
         }
 
@@ -135,11 +135,11 @@ namespace RRRaves.Web.Controllers
                     RestaurantFunctions rf = new RestaurantFunctions();
                     rf.UpdateRestaurant(wr.RestaurantID, temp);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Restaurant", new { @id = wr.RestaurantID });
                 }
                 else
                 {
-                    return View("Edit", new { @id = wr.RestaurantID });
+                    return View("Edit");
                 }
             }
             catch
@@ -148,17 +148,36 @@ namespace RRRaves.Web.Controllers
             }
         }
 
+        public ActionResult DeleteReviewsFirst()
+        {
+            return View();
+        }
+
+
         // GET: Restaurant/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id.HasValue)
+            try
             {
-                SearchRestaurants sr = new SearchRestaurants();
-                var temp = sr.GetRestaurant(id.Value);
+                if (id.HasValue)
+                {
+                    RetrieveReviews rr = new RetrieveReviews();
+                    var revList = rr.RetrieveReviewList(id.Value);
+                    if (revList.Count > 0)
+                    {
+                        return RedirectToAction("DeleteReviewsFirst", "Restaurant", null);
+                    }
+                    SearchRestaurants sr = new SearchRestaurants();
+                    var temp = sr.GetRestaurant(id.Value);
 
-                return View(WebDataConversion.RestaurantToWeb(temp));
+                    return View(WebDataConversion.RestaurantToWeb(temp));
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
             }
-            else
+            catch
             {
                 return new EmptyResult();
             }

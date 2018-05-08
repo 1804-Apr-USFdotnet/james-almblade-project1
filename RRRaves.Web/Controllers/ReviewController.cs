@@ -25,7 +25,7 @@ namespace RRRaves.Web.Controllers
             {
                 WebReview temp = new WebReview();
                 temp.Restaurant = id.Value;
-                return View(temp);
+                return View("Create", temp);
             }
             else { return new EmptyResult(); }
         }
@@ -42,8 +42,9 @@ namespace RRRaves.Web.Controllers
                     var rf = new ReviewFunctions();
                     rf.AddReview(WebDataConversion.WebReviewToData(WebRv));
                     var temp = WebRv.Restaurant;
-                    return RedirectToAction("Index", "Restaurant", null);
-                } else
+                    return RedirectToAction("Details", "Restaurant", new { @id = WebRv.Restaurant });
+                }
+                else
                 {
                     return View();
                 }
@@ -51,7 +52,7 @@ namespace RRRaves.Web.Controllers
             }
             catch
             {
-                return View();
+                return new EmptyResult();
             }
         }
 
@@ -77,14 +78,14 @@ namespace RRRaves.Web.Controllers
         {
             try
             {
-  
+
                 if (ModelState.IsValid)
                 {
                     var temp = WebDataConversion.WebReviewToData(webr);
                     ReviewFunctions rf = new ReviewFunctions();
                     rf.UpdateReview(webr.ReviewID, temp);
                     var temp2 = webr.Restaurant;
-                    return RedirectToAction("Index", "Restaurant", null);
+                    return RedirectToAction("Details", "Restaurant", new { @id = webr.Restaurant });
                 }
                 else
                 {
@@ -98,11 +99,13 @@ namespace RRRaves.Web.Controllers
             }
         }
 
+
         // GET: Review/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id.HasValue)
             {
+
                 RetrieveReviews rr = new RetrieveReviews();
                 var temp = rr.GetReview(id.Value);
 
@@ -120,12 +123,15 @@ namespace RRRaves.Web.Controllers
         {
             try
             {
-              
-                    ReviewFunctions rf = new ReviewFunctions();
 
-                    rf.RemoveReview(id);
-                    return RedirectToAction("Index", "Restaurant", null);
-            
+                ReviewFunctions rf = new ReviewFunctions();
+                RetrieveReviews rr = new RetrieveReviews();
+                var temp = rr.GetReview(id).Restaurant;
+
+
+                rf.RemoveReview(id);
+                return RedirectToAction("Details", "Restaurant", new { @id = temp.Value});
+
             }
             catch
             {
