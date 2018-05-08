@@ -7,7 +7,7 @@ using Repository;
 
 namespace SearchFunction
 {
-    class RetrieveReviews : IRetrieveReviews
+    public class RetrieveReviews : IRetrieveReviews
     {
         public Review GetReview(int ReviewID)
         {

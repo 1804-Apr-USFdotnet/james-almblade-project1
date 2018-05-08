@@ -1,0 +1,17 @@
+﻿@model List<RRRaves.Web.Models.WebRestaurant>
+
+@{
+    ViewBag.Title = "DisplayAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row my-3"><h2>Display All By Rating</h2>
+    @Html.ActionLink("Display all by name.", "DisplayAllName", "Restaurant")
+    </div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_RestaurantCard", item)
+    }
+</div>

@@ -1,0 +1,21 @@
+﻿
+@model RRRaves.Web.Models.WebReview
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h2 class="card-title">@Html.DisplayNameFor(model => model.Rating): @Html.DisplayFor(model => model.Rating)</h2>
+            <p class="card-text">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ReviewText)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ReviewText)
+                    </dd>
+                </dl>
+
+            </p>
+        </div>
+    </div>
+</div>

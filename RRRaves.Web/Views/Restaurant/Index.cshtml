@@ -1,0 +1,40 @@
+﻿@model string
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row my-4">
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <h3 class="card-header">Welcome!</h3>
+            <div class="card-body">
+                <h5 class="card-title">Find Restaurants Here!</h5>
+            </div>
+            <img style="height: 200px; width: 100%; display: block;" src="~/Images/cooking-dinner-food-76093.jpg" alt="bar image">
+            <div class="card-body">
+                <p class="card-text">Please select from the options below to begin looking for great local restaurants!</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8"><img src="~/Images/after-business-hours-architecture-bar-34650.jpg" class="img-fluid rounded" alt="Chicken food" /></div>
+
+</div>
+<div class="row my-3">
+    <div class="col-sm-4">
+        @using (Html.BeginForm("Search", "Restaurant", FormMethod.Get))
+        {
+            @Html.TextBox("SearchRest");
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        }
+    </div>
+    <div class="col-sm-4">
+        @Html.ActionLink("Display All", "DisplayAllName", "Restaurant", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-sm-4">
+        @Html.ActionLink("Add", "Create", "Restaurant", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+</div>
+

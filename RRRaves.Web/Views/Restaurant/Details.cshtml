@@ -1,0 +1,23 @@
+﻿@model RRRaves.Web.Models.RestaurantAndReviews
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 my-3">
+    @Html.Partial("_DetailsRestaurantCard", Model.WebRest)
+</div>
+<div class="row my-3">
+    @{ if (Model.WebReviews != null)
+        {
+
+            foreach (var item in Model.WebReviews)
+            {
+                @Html.Partial("_ReviewCard", item)
+            }
+        }
+        else
+        {
+            <h3>No reviews for this item.</h3>
+        }
+    }
+</div>

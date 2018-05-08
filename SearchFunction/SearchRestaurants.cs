@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using Repository;
 
 namespace SearchFunction
@@ -13,6 +14,8 @@ namespace SearchFunction
         public SearchRestaurants()
         {
         }
+
+        static Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         public List<Restaurant> GetTopRestaurants()
         {
@@ -24,7 +27,6 @@ namespace SearchFunction
                 }
                 catch (Exception e)
                 {
-                    var logger = NLog.LogManager.GetCurrentClassLogger();
                     logger.Debug(e, e.Message);
                     throw;
                 }
@@ -33,18 +35,36 @@ namespace SearchFunction
 
         public List<Restaurant> FindRestaurants(string s)
         {
-            using (var WorkUnit = new UnitOfWork(new RRRavesDBEntities()))
+            try
             {
-                return WorkUnit.RestaurantRepo.Find(x => x.Name.ToUpper().Contains(s.ToUpper())).ToList();
+
+                using (var WorkUnit = new UnitOfWork(new RRRavesDBEntities()))
+                {
+                    return WorkUnit.RestaurantRepo.Find(x => x.Name.ToUpper().Contains(s.ToUpper())).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Debug(e, e.Message);
+                throw;
             }
         }
 
         public Restaurant GetRestaurant(int id)
         {
-            using (var WorkUnit = new UnitOfWork(new RRRavesDBEntities()))
+            try
             {
-                return WorkUnit.RestaurantRepo.Get(id);
+                using (var WorkUnit = new UnitOfWork(new RRRavesDBEntities()))
+                {
+                    return WorkUnit.RestaurantRepo.Get(id);
+                }
             }
+            catch (Exception e)
+            {
+                logger.Debug(e, e.Message);
+                throw;
+            }
+
         }
     }
 }

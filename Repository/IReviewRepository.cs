@@ -8,6 +8,6 @@ namespace Repository
 {
     public interface IReviewRepository : IRepository<Review>, IAverager
     {
-        void EditReview(int id, string field, string newvalue);
+        void EditReview(int id, Review r);
     }
 }

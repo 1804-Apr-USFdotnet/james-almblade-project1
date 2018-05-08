@@ -1,0 +1,34 @@
+﻿@model RRRaves.Web.Models.WebReview
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row my-2">
+    <div class="col-sm-12">
+        <h2>Delete</h2>
+    </div>
+    <div class="col-sm-12">
+        <p>Are you sure you want to delete this review?</p>
+    </div>
+</div>
+<div class="row my-2">
+    @Html.Partial("_ReviewCardSimple", Model)
+</div>
+<div class="row my-2">
+    <div class="col-sm-6">
+        @using (Html.BeginForm("Delete"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Rating)
+        @Html.HiddenFor(model => model.ReviewID)
+        @Html.HiddenFor(model => model.ReviewText)
+        @Html.HiddenFor(model => model.Restaurant)
+        <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
+}
+    </div>
+    <div class="col-sm-6">
+        @Html.ActionLink("Cancel", "Index", "Restaurant", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

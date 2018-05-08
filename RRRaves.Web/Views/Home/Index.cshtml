@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row my-4">
+    <div class="col-lg-8">
+        <img class="img-fluid rounded" src="~/Images/chips-dinner-fast-food-70497.jpg" alt="Food picture!">
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+        <h1>Restaurant Reviews and Raves!</h1>
+        <p>Welcome to Restaurant Reviews and Raves!  Here we provide many restaurant reviews and highlight food to rave about.</p>
+    </div>
+    <!-- /.col-md-4 -->
+</div>
+
+@Html.Partial("_Top3Cards", (List<RRRaves.Web.Models.WebRestaurant>)@ViewBag.TopRest)

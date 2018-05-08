@@ -1,0 +1,56 @@
+﻿@model RRRaves.Web.Models.WebRestaurant
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h2 class="card-title">@Html.ActionLink(Model.Name, "Edit", "Restaurant", new { @id = Model.RestaurantID }, null)</h2>
+            <p class="card-text">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AveRating)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AveRating)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Zipcode)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Zipcode)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Phone)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Website)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Website)
+                    </dd>
+                </dl>
+                @Html.HiddenFor(model => model.RestaurantID)
+            </p>
+            <div class="card-footer">
+                @Html.ActionLink("Delete", "Delete", "Restaurant", new { @id = Model.RestaurantID }, new { @class = "btn btn-primary" })
+            </div>
+            <div class="card-footer">
+                @Html.ActionLink("Add Review", "Create", "Review", new { @id = Model.RestaurantID }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

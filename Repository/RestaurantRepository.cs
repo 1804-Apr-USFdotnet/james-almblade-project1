@@ -17,32 +17,32 @@ namespace Repository
             return RRRavesDBEntities.Set<Restaurant>().OrderByDescending(x => x.AveRating).Take(3);
         }
 
-        public void EditRestaurant(int id, string field, string newvalue)
+        public new Restaurant Get(int id)
         {
-            switch (field)
-            {
-                case "Name":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).Name = newvalue;
-                    break;
-                case "Address":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).Address = newvalue;
-                    break;
-                case "City":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).City = newvalue;
-                    break;
-                case "ZipCode":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).Zipcode = newvalue;
-                    break;
-                case "Phone":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).Phone = newvalue;
-                    break;
-                case "Website":
-                    RRRavesDBEntities.Set<Restaurant>().Find(id).Website = newvalue;
-                    break;
-                default:
-                    break;
+            var temp = db.Set<Restaurant>().SingleOrDefault(i => i.ID_Restaurant == id);
+            return temp;
+        }
 
-            }
+        public void EditRestaurant(int id, Restaurant restaurant)
+        {
+            //var rest = RRRavesDBEntities.Set<Restaurant>().Single(i => i.ID_Restaurant == id);
+            //if (rest != null)
+            //{
+            //    rest.Name = restaurant.Name;
+            //    rest.Address = restaurant.Address;
+            //    rest.City = restaurant.City;
+            //    rest.Zipcode = restaurant.Zipcode;
+            //    rest.Phone = restaurant.Phone;
+            //    rest.Website = restaurant.Website;
+            //}
+
+            var oldRest = RRRavesDBEntities.Restaurants.Find(id);
+            RRRavesDBEntities.Entry(oldRest).CurrentValues.SetValues(restaurant);
+        }
+
+        public new void Remove(Restaurant entity)
+        {
+            RRRavesDBEntities.Set<Restaurant>().Remove(entity);
         }
 
         public RRRavesDBEntities RRRavesDBEntities { get { return db as RRRavesDBEntities; } }

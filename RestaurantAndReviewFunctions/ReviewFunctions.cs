@@ -30,11 +30,11 @@ namespace RestaurantAndReviewFunctions
             }
         }
 
-        public void UpdateReview(int id, string field, string newvalue)
+        public void UpdateReview(int id, Review r)
         {
             using (var uow = new UnitOfWork(new RRRavesDBEntities()))
             {
-                uow.ReviewRepo.EditReview(id, field, newvalue);
+                uow.ReviewRepo.EditReview(id, r);
                 uow.Complete();
             }
         }

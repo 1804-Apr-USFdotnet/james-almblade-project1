@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.Entity;
+using NLog;
 
 namespace Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        static Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         protected readonly DbContext db;
 
         public Repository(DbContext context)
@@ -36,7 +39,15 @@ namespace Repository
 
         public TEntity Get(int id)
         {
-            return db.Set<TEntity>().Find(id);
+            var temp = db.Set<TEntity>().Find(id);
+            if (temp != null)
+            {
+                return temp;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public IEnumerable<TEntity> GetAll()

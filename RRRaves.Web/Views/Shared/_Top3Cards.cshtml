@@ -1,0 +1,93 @@
+﻿@model List<RRRaves.Web.Models.WebRestaurant>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="card-title">@Html.DisplayFor(model => model[0].Name) </h2>
+                <p class="card-text">
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].AveRating)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].AveRating)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Phone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Phone)
+                        </dd>
+
+                    </dl>
+                </p>
+            </div>
+            <div class="card-footer">
+                @Html.ActionLink("More Info", "Details", "Restaurant", new { @id = Model[0].RestaurantID }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-4 -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="card-title">@Html.DisplayFor(model => model[1].Name) </h2>
+                <p class="card-text">
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[1].AveRating)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[1].AveRating)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[1].Phone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[1].Phone)
+                        </dd>
+
+                    </dl>
+                </p>
+            </div>
+            <div class="card-footer">
+                @Html.ActionLink("More Info", "Details", "Restaurant", new { @id = Model[1].RestaurantID }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-4 -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="card-title">@Html.DisplayFor(model => model[2].Name) </h2>
+                <p class="card-text">
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[2].AveRating)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[2].AveRating)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[2].Phone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[2].Phone)
+                        </dd>
+
+                    </dl>
+                </p>
+            </div>
+            <div class="card-footer">
+                @Html.ActionLink("More Info", "Details", "Restaurant", new { @id = Model[2].RestaurantID }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

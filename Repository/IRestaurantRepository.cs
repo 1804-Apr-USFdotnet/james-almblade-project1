@@ -9,6 +9,6 @@ namespace Repository
     public interface IRestaurantRepository : IRepository<Restaurant>
     {
         IEnumerable<Restaurant> GetTopThree();
-        void EditRestaurant(int id, string field, string newvalue);
+        void EditRestaurant(int id, Restaurant restaurant);
     }
 }

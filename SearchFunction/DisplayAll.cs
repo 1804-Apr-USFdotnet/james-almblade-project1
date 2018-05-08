@@ -17,12 +17,24 @@ namespace SearchFunction
             }
         }
 
+        public List<Restaurant> RestaurantsByName(List<Restaurant> restaurants)
+        {
+
+            return restaurants.OrderBy(x => x.Name).ToList();
+
+        }
+
         public List<Restaurant> RestaurantsByRating()
         {
             using (var WorkUnit = new UnitOfWork(new RRRavesDBEntities()))
             {
                 return WorkUnit.RestaurantRepo.GetAll().OrderByDescending(x => x.AveRating).ToList();
             }
+        }
+
+        public List<Restaurant> RestaurantsByRating(List<Restaurant> restaurants)
+        {
+            return restaurants.OrderByDescending(x => x.AveRating).ToList();
         }
 
         public List<Review> ReviewsAscending()
