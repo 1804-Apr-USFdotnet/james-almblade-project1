@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using RestaurantAndReviewFunctions;
 using SearchFunction;
 using RRRaves.Web.Models;
@@ -27,7 +23,7 @@ namespace RRRaves.Web.Controllers
                 temp.Restaurant = id.Value;
                 return View("Create", temp);
             }
-            else { return new EmptyResult(); }
+            else { return new HttpNotFoundResult(); }
         }
 
         // POST: Review/Create
@@ -59,16 +55,23 @@ namespace RRRaves.Web.Controllers
         // GET: Review/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id.HasValue)
+            try
             {
-                RetrieveReviews rr = new RetrieveReviews();
-                var rev = rr.GetReview(id.Value);
-                var WebRev = WebDataConversion.ReviewToWeb(rev);
-                return View("Edit", WebRev);
+                if (id.HasValue)
+                {
+                    RetrieveReviews rr = new RetrieveReviews();
+                    var rev = rr.GetReview(id.Value);
+                    var WebRev = WebDataConversion.ReviewToWeb(rev);
+                    return View("Edit", WebRev);
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
             }
-            else
+            catch
             {
-                return new EmptyResult();
+                return new HttpNotFoundResult();
             }
         }
 
@@ -130,7 +133,7 @@ namespace RRRaves.Web.Controllers
 
 
                 rf.RemoveReview(id);
-                return RedirectToAction("Details", "Restaurant", new { @id = temp.Value});
+                return RedirectToAction("Details", "Restaurant", new { @id = temp.Value });
 
             }
             catch

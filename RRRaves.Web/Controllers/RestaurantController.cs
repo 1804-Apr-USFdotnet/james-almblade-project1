@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using SearchFunction;
 using RestaurantAndReviewFunctions;
@@ -40,15 +37,28 @@ namespace RRRaves.Web.Controllers
         // GET: Restaurant/Details/5
         public ActionResult Details(int? id)
         {
-
-            if (id.HasValue)
+            try
             {
-                var Model = new RestaurantAndReviews(id.Value);
-                return View(Model);
+                if (id.HasValue)
+                {
+                    var Model = new RestaurantAndReviews(id.Value);
+                    if (Model.WebRest == null)
+                    {
+                        return new HttpNotFoundResult();
+                    }
+                    else
+                    {
+                        return View(Model);
+                    }
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
             }
-            else
+            catch
             {
-                return new EmptyResult();
+                return new HttpNotFoundResult();
             }
 
         }
@@ -110,16 +120,24 @@ namespace RRRaves.Web.Controllers
         // GET: Restaurant/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id.HasValue)
+            try
             {
-                SearchRestaurants sr = new SearchRestaurants();
-                var rest = sr.GetRestaurant(id.Value);
-                var WebRest = WebDataConversion.RestaurantToWeb(rest);
-                return View("Edit", WebRest);
+
+                if (id.HasValue)
+                {
+                    SearchRestaurants sr = new SearchRestaurants();
+                    var rest = sr.GetRestaurant(id.Value);
+                    var WebRest = WebDataConversion.RestaurantToWeb(rest);
+                    return View("Edit", WebRest);
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
             }
-            else
+            catch
             {
-                return new EmptyResult();
+                return new HttpNotFoundResult();
             }
         }
 
